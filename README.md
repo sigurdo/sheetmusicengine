@@ -3,7 +3,7 @@
 ## 1. Klon repo:
 
 ```
-git clone ...
+git clone https://github.com/sigurdo/sheetmusicengine.git
 ```
 
 ## 2. Installer nødvendige programmer
