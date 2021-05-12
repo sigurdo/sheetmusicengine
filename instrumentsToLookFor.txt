@@ -1,0 +1,22 @@
+flute
+tuba
+drums
+snare drum
+tubas
+basses
+bass
+synthesizer
+synth
+clarinet
+trombone
+trumpet
+cornet
+string bass
+saxophone
+horn
+baritone
+euphonium
+cymbals
+CYMBALS
+mallets
+bells
