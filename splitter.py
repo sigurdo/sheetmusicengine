@@ -31,6 +31,8 @@ parser.add_argument("-p", "--pdf", type=str, default="all", metavar="PDF_PATH", 
 parser.add_argument("-s", "--start-page", type=int, default=1, metavar="PAGE_NR", help="Select a page in the sheet pdf to start from")
 parser.add_argument("-e", "--end-page", type=int, default=None, metavar="PAGE_NR", help="Select a page in the sheet pdf to end with")
 parser.add_argument("-x", "--single-page", type=int, default=None, metavar="PAGE_NR", help="Select a single page in the sheet pdf to analyze. Overrides any specified start-page and end-page")
+parser.add_argument("--use-lstm", action="store_true", help="If provided tesseract will be configured to use LSTM engine of legacy engine.")
+parser.add_argument("--tessdata-dir", type=str, help="Sets the TESSDATA directory for tesseract.")
 args = parser.parse_args()
 
 if args.single_page:
@@ -61,7 +63,7 @@ for sheetName in sheetNames:
 for i, pdfPath in enumerate(pdfPaths):
 	sheetName = sheetNames[i]
 	print("Analyzing ", sheetNames[pdfPaths.index(pdfPath)], ":", sep="")
-	parts, instrumentsDefaultParts = engine.processUploadedPdf(pdfPath, TMP_PATH, INSTRUMENTS)
+	parts, instrumentsDefaultParts = engine.processUploadedPdf(pdfPath, TMP_PATH, INSTRUMENTS, use_lstm=args.use_lstm, tessdata_dir=args.tessdata_dir)
 	print("Splitting pdf...")
 	for part in parts:
 		pdf = PyPDF2.PdfFileReader(pdfPath)

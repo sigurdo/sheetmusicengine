@@ -224,7 +224,7 @@ def predictParts(detectionData, instruments, imageWidth, imageHeight):
 			# Its probably a full score
 			return ["full score"], [["full score"]]
 
-def processUploadedPdf(pdfPath, imagesDirPath, instruments):
+def processUploadedPdf(pdfPath, imagesDirPath, instruments, use_lstm=False, tessdata_dir=None):
 	parts = []
 	instrumentsDefaultParts = { instrument: None for instrument in instruments }
 	instrumentsDefaultParts["full score"] = None
@@ -237,7 +237,10 @@ def processUploadedPdf(pdfPath, imagesDirPath, instruments):
 		print("cropper...")
 		img = cropImage(cv2.imread(imagePaths[i]))
 		print("detecter...")
-		detectionData = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT, config="--user-words sheetmusicUploader/instrumentsToLookFor.txt --psm 11 --dpi 96 -l eng")
+		config = "--user-words sheetmusicUploader/instrumentsToLookFor.txt --psm 11 --dpi 96 -l eng"
+		if use_lstm: config += " --oem 1"
+		if tessdata_dir != None: config += " --tessdata-dir \""+tessdata_dir+"\""
+		detectionData = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT, config=config)
 		print("predicter...")
 		partNames, instrumentses = predictParts(detectionData, instruments, img.shape[1], img.shape[0])
 		print("partNames:", partNames, "instrumentses:", instrumentses)
