@@ -1,11 +1,11 @@
-Pillow==7.2.0
+Pillow==8.3.1
 PyPDF2==1.26.0
-opencv-python==4.3.0.38
+opencv-python==4.5.3.56
 # numpy==1.19.0 # Numpy should already be contained in opencv
 pdf2image==1.13.1
 # pdf2image also requires poppler: sudo apt install poppler-utils, or windows: http://blog.alivate.com.au/poppler-windows/
 imutils==0.5.3
-pytesseract==0.3.4
+pytesseract==0.3.8
 # pytesseract also requires tesseract: https://github.com/tesseract-ocr/tesseract/wiki
 pyyaml==5.3.1
 unidecode==1.1.1
